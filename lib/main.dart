@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:user_data/pages/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:user_data/pages/home/home_page.dart';
+import 'package:user_data/pages/home/submit_provider.dart';
 import 'package:user_data/service/gsheets_service.dart';
 
 void main() async {
@@ -15,9 +17,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => SubmitProvider(),
+        )
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomePage(),
+      ),
     );
   }
 }

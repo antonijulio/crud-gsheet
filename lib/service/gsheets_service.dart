@@ -1,5 +1,5 @@
 import 'package:gsheets/gsheets.dart';
-import 'package:user_data/models/user_header.dart';
+import 'package:user_data/models/user.dart';
 
 class GSheetsService {
   // google sheets credentials json
@@ -52,5 +52,13 @@ class GSheetsService {
     } catch (e) {
       return spreadsheet.worksheetByTitle(title)!;
     }
+  }
+
+  //insert rows data
+  static Future<void> insert(List<Map<String, dynamic>> rowLists) async {
+    // jika data kosong return null
+    if (_userSheets == null) return;
+
+    _userSheets!.values.map.appendRows(rowLists);
   }
 }
